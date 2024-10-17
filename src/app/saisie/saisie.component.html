@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row mb-3">
+    <p class="col-4">Lot: {{ tracking.lot() }}</p>
+    <p class="col-4">Isa: {{ tracking.isa() }}</p>
+    <p class="col-4">Total: {{ tracking.total() }}</p>
+  </div>
+  <form (ngSubmit)="submit()" [formGroup]="userForm">
+    <div class="row mb-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Code</mat-label>
+        <input matInput formControlName="code" #codeInput />
+        <mat-error>Code obligatoire</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row mb-3">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Destination</mat-label>
+        <input
+          type="text"
+          placeholder="Pick one"
+          aria-label="Number"
+          matInput
+          formControlName="destination"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          @for (option of filteredDestinations | async; track option.id) {
+            <mat-option [value]="option.option">{{ option.option }}</mat-option>
+          }
+        </mat-autocomplete>
+        <mat-error>Destination obligatoire</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row mb-3">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          @for (type of typesOption; track type.id) {
+            <mat-option value="type.option">{{ type.option }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>Type obligatoire</mat-error>
+      </mat-form-field>
+    </div>
+    <button type="submit" mat-flat-button [disabled]="userForm.invalid">
+      Submit
+    </button>
+  </form>
+</div>
