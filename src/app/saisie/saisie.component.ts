@@ -55,13 +55,51 @@ export class SaisieComponent {
     { id: 3, option: 'destination 3' },
   ];
 
+  typeOperations = [
+    { id: 1, option: 'Entrée' },
+    { id: 2, option: 'Sortie' },
+  ];
+
+  typeCaracteristiques = [
+    {
+      id: 1,
+      option:
+        '4-GF -Lot #01-Veeralin LLIN-Polyéthylène-MII PBO-VKA Polymers -TANA',
+    },
+    {
+      id: 2,
+      option:
+        '5-GF -Lot #02-Veeralin LLIN-Polyéthylène-MII PBO-VKA Polymers -TOLAGNARO',
+    },
+    {
+      id: 3,
+      option:
+        '7-GF -Lot #04-Yorkool LN-Polyester-MII SINGLE-Tianjin Yorkool-TOAMASINA',
+    },
+    {
+      id: 4,
+      option: '1-PMI -Lot #01-SafeNet-Polyester-Standard-Fujian Yamei-TANA',
+    },
+    {
+      id: 5,
+      option:
+        '2-PMI -Lot #02-SafeNet-Polyester-Standard-Fujian Yamei-TOAMASINA',
+    },
+    {
+      id: 6,
+      option: '3-PMI -Lot #03-PermaNet Dual-Polyester-Dual-Vestergaard-TANA',
+    },
+  ];
+
   filteredDestinations: Observable<{ id: number; option: string }[]>;
 
   constructor() {
     this.userForm = new FormGroup({
       code: new FormControl('', [Validators.required, Validators.minLength(5)]),
       destination: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required),
+      operation: new FormControl('', Validators.required),
+      lot: new FormControl('', Validators.required),
+      caracteristique: new FormControl('', Validators.required),
     });
 
     this.filteredDestinations = this.userForm.controls[
